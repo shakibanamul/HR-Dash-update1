@@ -12,7 +12,9 @@ import {
   Menu,
   X,
   HelpCircle,
-  LogOut
+  LogOut,
+  ChevronLeft,
+  ChevronRight
 } from 'lucide-react';
 
 interface SidebarProps {
@@ -46,24 +48,44 @@ const Sidebar: React.FC<SidebarProps> = ({ activeSection, setActiveSection, isOp
       
       {/* Sidebar */}
       <div className={`
-        fixed inset-y-0 left-0 z-50 w-64 bg-white text-gray-900 transform transition-transform duration-300 ease-in-out shadow-xl border-r border-gray-200
-        ${isOpen ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'}
+        fixed inset-y-0 left-0 z-50 bg-white text-gray-900 transform transition-all duration-300 ease-in-out shadow-xl border-r border-gray-200
+        ${isOpen ? 'w-64 translate-x-0' : 'w-20 -translate-x-full lg:translate-x-0'}
       `}>
         <div className="flex flex-col h-full">
           {/* Header */}
           <div className="flex items-center justify-between p-4 border-b border-gray-200 bg-gray-50">
-            <div>
-              <h1 className="text-lg lg:text-xl xl:text-2xl font-bold bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
-                HR Dashboard
-              </h1>
-              <p className="text-gray-500 text-xs lg:text-sm mt-1 font-medium">Management System</p>
+            <div className="flex items-center justify-between w-full">
+              {isOpen ? (
+                <div>
+                  <h1 className="text-lg lg:text-xl xl:text-2xl font-bold bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
+                    HR Dashboard
+                  </h1>
+                  <p className="text-gray-500 text-xs lg:text-sm mt-1 font-medium">Management System</p>
+                </div>
+              ) : (
+                <div className="w-full flex justify-center">
+                  <div className="w-8 h-8 bg-gradient-to-r from-blue-400 to-purple-400 rounded-lg flex items-center justify-center">
+                    <span className="text-white font-bold text-sm">HR</span>
+                  </div>
+                </div>
+              )}
+              
+              {/* Desktop minimize button */}
+              <button
+                onClick={() => setIsOpen(!isOpen)}
+                className="hidden lg:block text-gray-500 hover:text-gray-700 hover:bg-gray-100 p-1 rounded-lg transition-all"
+              >
+                {isOpen ? <ChevronLeft size={20} /> : <ChevronRight size={20} />}
+              </button>
+              
+              {/* Mobile close button */}
+              <button
+                onClick={() => setIsOpen(false)}
+                className="lg:hidden text-gray-500 hover:text-gray-700 hover:bg-gray-100 p-1 rounded-lg transition-all"
+              >
+                <X size={24} />
+              </button>
             </div>
-            <button
-              onClick={() => setIsOpen(false)}
-              className="lg:hidden text-gray-500 hover:text-gray-700 hover:bg-gray-100 p-1 rounded-lg transition-all"
-            >
-              <X size={24} />
-            </button>
           </div>
           
           {/* Navigation */}
@@ -75,20 +97,28 @@ const Sidebar: React.FC<SidebarProps> = ({ activeSection, setActiveSection, isOp
                   key={item.id}
                   onClick={() => {
                     setActiveSection(item.id);
-                    setIsOpen(false); // Close sidebar on mobile after selection
+                    // Only close sidebar on mobile after selection
+                    if (window.innerWidth < 1024) {
+                      setIsOpen(false);
+                    }
                   }}
-                  className={`w-full flex items-center space-x-3 px-4 py-3 rounded-lg transition-colors ${
+                  className={`w-full flex items-center rounded-lg transition-all duration-200 ${
+                    isOpen ? 'space-x-3 px-4 py-3' : 'justify-center px-2 py-3'
+                  } ${
                     activeSection === item.id
                       ? 'bg-gradient-to-r from-blue-600 to-blue-700 text-white shadow-lg transform scale-105'
                       : 'text-gray-600 hover:bg-blue-50 hover:text-blue-700 hover:transform hover:scale-102'
                   }`}
+                  title={!isOpen ? item.label : undefined}
                 >
                   <Icon size={18} className={`flex-shrink-0 transition-transform ${
                     activeSection === item.id ? 'text-blue-100' : 'group-hover:text-blue-600'
                   }`} />
-                  <span className={`font-medium text-sm lg:text-base transition-all ${
-                    activeSection === item.id ? 'text-white font-semibold' : ''
-                  }`}>{item.label}</span>
+                  {isOpen && (
+                    <span className={`font-medium text-sm lg:text-base transition-all ${
+                      activeSection === item.id ? 'text-white font-semibold' : ''
+                    }`}>{item.label}</span>
+                  )}
                 </button>
               );
             })}
@@ -102,10 +132,13 @@ const Sidebar: React.FC<SidebarProps> = ({ activeSection, setActiveSection, isOp
                 // Handle helpline action - could open a modal, navigate to help page, or open chat
                 alert('Helpline: Call +1-800-HR-HELP or email support@company.com');
               }}
-              className="w-full flex items-center space-x-3 px-4 py-3 rounded-lg text-gray-600 hover:bg-green-50 hover:text-green-700 transition-all duration-200 hover:transform hover:scale-102"
+              className={`w-full flex items-center rounded-lg text-gray-600 hover:bg-green-50 hover:text-green-700 transition-all duration-200 hover:transform hover:scale-102 ${
+                isOpen ? 'space-x-3 px-4 py-3' : 'justify-center px-2 py-3'
+              }`}
+              title={!isOpen ? 'Help & Support' : undefined}
             >
               <HelpCircle size={18} className="flex-shrink-0" />
-              <span className="font-medium text-sm lg:text-base">Help & Support</span>
+              {isOpen && <span className="font-medium text-sm lg:text-base">Help & Support</span>}
             </button>
             
             {/* Logout Button */}
@@ -118,10 +151,13 @@ const Sidebar: React.FC<SidebarProps> = ({ activeSection, setActiveSection, isOp
                   // In a real app, you would clear auth tokens and redirect
                 }
               }}
-              className="w-full flex items-center space-x-3 px-4 py-3 rounded-lg text-gray-600 hover:bg-red-50 hover:text-red-700 transition-all duration-200 hover:transform hover:scale-102"
+              className={`w-full flex items-center rounded-lg text-gray-600 hover:bg-red-50 hover:text-red-700 transition-all duration-200 hover:transform hover:scale-102 ${
+                isOpen ? 'space-x-3 px-4 py-3' : 'justify-center px-2 py-3'
+              }`}
+              title={!isOpen ? 'Logout' : undefined}
             >
               <LogOut size={18} className="flex-shrink-0" />
-              <span className="font-medium text-sm lg:text-base">Logout</span>
+              {isOpen && <span className="font-medium text-sm lg:text-base">Logout</span>}
             </button>
           </div>
         </div>

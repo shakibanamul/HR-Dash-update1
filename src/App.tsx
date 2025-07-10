@@ -13,7 +13,7 @@ import Notifications from './components/Dashboard/Notifications';
 
 function App() {
   const [activeSection, setActiveSection] = useState('overview');
-  const [sidebarOpen, setSidebarOpen] = useState(false);
+  const [sidebarOpen, setSidebarOpen] = useState(true);
 
   const renderContent = () => {
     switch (activeSection) {
@@ -39,7 +39,9 @@ function App() {
   };
 
   return (
-    <div className="flex min-h-screen bg-gray-50 lg:pl-64">
+    <div className={`flex min-h-screen bg-gray-50 transition-all duration-300 ${
+      sidebarOpen ? 'lg:pl-64' : 'lg:pl-20'
+    }`}>
       <Sidebar 
         activeSection={activeSection} 
         setActiveSection={setActiveSection}
