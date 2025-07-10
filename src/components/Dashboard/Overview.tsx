@@ -761,6 +761,7 @@ const Overview: React.FC<OverviewProps> = ({ setActiveSection }) => {
           ))}
         </div>
       </div>
+    </div>
   );
 };
 
