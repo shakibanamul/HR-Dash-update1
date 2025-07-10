@@ -106,17 +106,17 @@ const Sidebar: React.FC<SidebarProps> = ({ activeSection, setActiveSection, isOp
                     isOpen ? 'space-x-3 px-4 py-3' : 'justify-center px-2 py-3'
                   } ${
                     activeSection === item.id
-                      ? 'bg-gradient-to-r from-blue-600 to-blue-700 text-white shadow-lg transform scale-105'
-                      : 'text-gray-600 hover:bg-blue-50 hover:text-blue-700 hover:transform hover:scale-102'
+                      ? 'bg-blue-600/30 backdrop-blur-md border border-blue-300/50 text-blue-900 shadow-lg transform scale-105 backdrop-saturate-150'
+                      : 'text-gray-600 hover:bg-blue-50/30 hover:backdrop-blur-sm hover:border hover:border-blue-200/50 hover:text-blue-700 hover:transform hover:scale-102 hover:backdrop-saturate-125'
                   }`}
                   title={!isOpen ? item.label : undefined}
                 >
                   <Icon size={18} className={`flex-shrink-0 transition-transform ${
-                    activeSection === item.id ? 'text-blue-100' : 'group-hover:text-blue-600'
+                    activeSection === item.id ? 'text-blue-800' : 'group-hover:text-blue-600'
                   }`} />
                   {isOpen && (
                     <span className={`font-medium text-sm lg:text-base transition-all ${
-                      activeSection === item.id ? 'text-white font-semibold' : ''
+                      activeSection === item.id ? 'text-blue-900 font-semibold' : ''
                     }`}>{item.label}</span>
                   )}
                 </button>
@@ -134,7 +134,7 @@ const Sidebar: React.FC<SidebarProps> = ({ activeSection, setActiveSection, isOp
               }}
               className={`w-full flex items-center rounded-lg text-gray-600 hover:bg-green-50 hover:text-green-700 transition-all duration-200 hover:transform hover:scale-102 ${
                 isOpen ? 'space-x-3 px-4 py-3' : 'justify-center px-2 py-3'
-              }`}
+              } hover:bg-green-50/30 hover:backdrop-blur-sm hover:border hover:border-green-200/50 hover:backdrop-saturate-125`}
               title={!isOpen ? 'Help & Support' : undefined}
             >
               <HelpCircle size={18} className="flex-shrink-0" />
@@ -153,7 +153,7 @@ const Sidebar: React.FC<SidebarProps> = ({ activeSection, setActiveSection, isOp
               }}
               className={`w-full flex items-center rounded-lg text-gray-600 hover:bg-red-50 hover:text-red-700 transition-all duration-200 hover:transform hover:scale-102 ${
                 isOpen ? 'space-x-3 px-4 py-3' : 'justify-center px-2 py-3'
-              }`}
+              } hover:bg-red-50/30 hover:backdrop-blur-sm hover:border hover:border-red-200/50 hover:backdrop-saturate-125`}
               title={!isOpen ? 'Logout' : undefined}
             >
               <LogOut size={18} className="flex-shrink-0" />
