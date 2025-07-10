@@ -736,7 +736,6 @@ const Overview: React.FC<OverviewProps> = ({ setActiveSection }) => {
           </button>
         </div>
       </div>
-    </div>
 
       {/* Department Distribution - Moved to bottom */}
       <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-4 sm:p-6">
