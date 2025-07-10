@@ -1,7 +1,11 @@
 import React, { useState } from 'react';
 import { Search, Bell, Mail, ChevronDown } from 'lucide-react';
 
-const Header: React.FC = () => {
+interface HeaderProps {
+  sidebarOpen: boolean;
+}
+
+const Header: React.FC<HeaderProps> = ({ sidebarOpen }) => {
   const [searchTerm, setSearchTerm] = useState('');
   const [showNotifications, setShowNotifications] = useState(false);
   const [showProfile, setShowProfile] = useState(false);
@@ -16,7 +20,11 @@ const Header: React.FC = () => {
   };
 
   return (
-    <header className="hidden lg:flex items-center justify-between bg-white border-b border-gray-200 px-6 py-4 shadow-sm">
+    <header className={`fixed top-0 z-30 flex items-center justify-between bg-white border-b border-gray-200 px-6 py-4 shadow-sm transition-all duration-300 ${
+      sidebarOpen 
+        ? 'left-0 w-full lg:left-64 lg:w-[calc(100%-16rem)]' 
+        : 'left-0 w-full lg:left-20 lg:w-[calc(100%-5rem)]'
+    }`}>
       {/* Search Bar */}
       <div className="flex-1 max-w-2xl">
         <div className="relative">

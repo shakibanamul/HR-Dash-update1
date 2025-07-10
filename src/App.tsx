@@ -50,7 +50,7 @@ function App() {
       />
       <div className="flex-1 flex flex-col">
         {/* Desktop Header */}
-        <Header />
+        <Header sidebarOpen={sidebarOpen} />
         
         {/* Mobile header */}
         <div className="lg:hidden bg-white border-b border-gray-200 p-4">
@@ -69,7 +69,7 @@ function App() {
         </div>
         
         {/* Main content */}
-        <div className="flex-1 overflow-auto">
+        <div className="flex-1 overflow-auto pt-16">
           <div className="p-4 sm:p-6 lg:p-6">
             {renderContent()}
           </div>
