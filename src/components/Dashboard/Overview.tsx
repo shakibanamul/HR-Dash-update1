@@ -208,7 +208,7 @@ const Overview: React.FC<OverviewProps> = ({ setActiveSection }) => {
       <div className="grid grid-cols-1 xs:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
         <button 
           onClick={handleAddEmployee}
-          className="bg-white p-3 sm:p-4 rounded-xl shadow-sm border border-gray-200 hover:shadow-md hover:border-blue-300 hover:scale-105 transition-all group w-full"
+          className="p-3 sm:p-4 rounded-xl hover:bg-white hover:shadow-md hover:border hover:border-blue-300 hover:scale-105 transition-all group w-full bg-gradient-to-br from-blue-50/50 to-blue-100/30"
         >
           <div className="flex items-center space-x-2 sm:space-x-3">
             <div className="p-2 bg-blue-50 rounded-lg group-hover:bg-blue-100 group-hover:scale-110 transition-all flex-shrink-0">
@@ -223,7 +223,7 @@ const Overview: React.FC<OverviewProps> = ({ setActiveSection }) => {
         
         <button 
           onClick={handleGenerateReport}
-          className="bg-white p-3 sm:p-4 rounded-xl shadow-sm border border-gray-200 hover:shadow-md hover:border-green-300 hover:scale-105 transition-all group w-full"
+          className="p-3 sm:p-4 rounded-xl hover:bg-white hover:shadow-md hover:border hover:border-green-300 hover:scale-105 transition-all group w-full bg-gradient-to-br from-green-50/50 to-green-100/30"
         >
           <div className="flex items-center space-x-2 sm:space-x-3">
             <div className="p-2 bg-green-50 rounded-lg group-hover:bg-green-100 group-hover:scale-110 transition-all flex-shrink-0">
@@ -238,7 +238,7 @@ const Overview: React.FC<OverviewProps> = ({ setActiveSection }) => {
         
         <button 
           onClick={handlePerformanceReviews}
-          className="bg-white p-3 sm:p-4 rounded-xl shadow-sm border border-gray-200 hover:shadow-md hover:border-purple-300 hover:scale-105 transition-all group w-full"
+          className="p-3 sm:p-4 rounded-xl hover:bg-white hover:shadow-md hover:border hover:border-purple-300 hover:scale-105 transition-all group w-full bg-gradient-to-br from-purple-50/50 to-purple-100/30"
         >
           <div className="flex items-center space-x-2 sm:space-x-3">
             <div className="p-2 bg-purple-50 rounded-lg group-hover:bg-purple-100 group-hover:scale-110 transition-all flex-shrink-0">
@@ -253,7 +253,7 @@ const Overview: React.FC<OverviewProps> = ({ setActiveSection }) => {
         
         <button 
           onClick={handleAnalytics}
-          className="bg-white p-3 sm:p-4 rounded-xl shadow-sm border border-gray-200 hover:shadow-md hover:border-yellow-300 hover:scale-105 transition-all group w-full"
+          className="p-3 sm:p-4 rounded-xl hover:bg-white hover:shadow-md hover:border hover:border-yellow-300 hover:scale-105 transition-all group w-full bg-gradient-to-br from-yellow-50/50 to-yellow-100/30"
         >
           <div className="flex items-center space-x-2 sm:space-x-3">
             <div className="p-2 bg-yellow-50 rounded-lg group-hover:bg-yellow-100 group-hover:scale-110 transition-all flex-shrink-0">
@@ -267,8 +267,15 @@ const Overview: React.FC<OverviewProps> = ({ setActiveSection }) => {
         </button>
       </div>
 
-      {/* Key Metrics - Enhanced Grid */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
+      {/* Unified Metrics Section */}
+      <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
+        <h3 className="text-lg font-semibold text-gray-900 mb-6 flex items-center">
+          <TrendingUp className="h-5 w-5 mr-2 text-blue-500" />
+          Key Performance Metrics
+        </h3>
+        
+        {/* Primary Metrics */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
         <div onClick={() => handleNavigation('employees')} className="cursor-pointer">
           <MetricCard
             title="Total Employees"
@@ -303,41 +310,65 @@ const Overview: React.FC<OverviewProps> = ({ setActiveSection }) => {
             subtitle="Out of 5.0"
           />
         </div>
-      </div>
 
-      {/* Secondary Metrics */}
-      <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
+        {/* Secondary Metrics */}
+        <div className="border-t border-gray-100 pt-6">
+          <h4 className="text-sm font-medium text-gray-600 mb-4">Additional Insights</h4>
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
         <div onClick={() => handleNavigation('employees')} className="cursor-pointer">
-          <MetricCard
-            title="Recent Hires"
-            value={recentHires}
-            icon={UserCheck}
-            subtitle="This month"
-          />
+            <div className="p-4 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors">
+              <div className="flex items-center space-x-3">
+                <div className="p-2 bg-green-100 rounded-lg">
+                  <UserCheck className="h-4 w-4 text-green-600" />
+                </div>
+                <div>
+                  <p className="text-sm font-medium text-gray-900">{recentHires}</p>
+                  <p className="text-xs text-gray-600">Recent Hires</p>
+                </div>
+              </div>
+            </div>
         </div>
         <div onClick={() => handleNavigation('recruitment')} className="cursor-pointer">
-          <MetricCard
-            title="Open Positions"
-            value={openPositions}
-            icon={Target}
-            subtitle="Active postings"
-          />
+            <div className="p-4 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors">
+              <div className="flex items-center space-x-3">
+                <div className="p-2 bg-blue-100 rounded-lg">
+                  <Target className="h-4 w-4 text-blue-600" />
+                </div>
+                <div>
+                  <p className="text-sm font-medium text-gray-900">{openPositions}</p>
+                  <p className="text-xs text-gray-600">Open Positions</p>
+                </div>
+              </div>
+            </div>
         </div>
         <div onClick={() => handleNavigation('performance')} className="cursor-pointer">
-          <MetricCard
-            title="High Performers"
-            value={highPerformers}
-            icon={Award}
-            subtitle="4.5+ rating"
-          />
+            <div className="p-4 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors">
+              <div className="flex items-center space-x-3">
+                <div className="p-2 bg-purple-100 rounded-lg">
+                  <Award className="h-4 w-4 text-purple-600" />
+                </div>
+                <div>
+                  <p className="text-sm font-medium text-gray-900">{highPerformers}</p>
+                  <p className="text-xs text-gray-600">High Performers</p>
+                </div>
+              </div>
+            </div>
         </div>
         <div onClick={() => handleNavigation('attendance')} className="cursor-pointer">
-          <MetricCard
-            title="Needs Attention"
-            value={lowAttendance}
-            icon={AlertTriangle}
-            subtitle="<90% attendance"
-          />
+            <div className="p-4 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors">
+              <div className="flex items-center space-x-3">
+                <div className="p-2 bg-red-100 rounded-lg">
+                  <AlertTriangle className="h-4 w-4 text-red-600" />
+                </div>
+                <div>
+                  <p className="text-sm font-medium text-gray-900">{lowAttendance}</p>
+                  <p className="text-xs text-gray-600">Needs Attention</p>
+                </div>
+              </div>
+            </div>
+        </div>
+          </div>
+        </div>
         </div>
       </div>
 
@@ -518,7 +549,7 @@ const Overview: React.FC<OverviewProps> = ({ setActiveSection }) => {
             {upcomingReviews > 0 && (
               <button 
                 onClick={() => handleAlertClick('reviews')}
-                className="w-full flex items-start space-x-3 p-3 bg-yellow-50 rounded-lg border border-yellow-200 hover:bg-yellow-100 transition-colors text-left"
+                className="w-full flex items-start space-x-3 p-3 bg-yellow-50/70 rounded-lg hover:bg-yellow-100 transition-colors text-left border-l-4 border-yellow-400"
               >
                 <AlertTriangle className="h-5 w-5 text-yellow-600 mt-0.5 flex-shrink-0" />
                 <div className="flex-1 min-w-0">
@@ -534,7 +565,7 @@ const Overview: React.FC<OverviewProps> = ({ setActiveSection }) => {
             {lowAttendance > 0 && (
               <button 
                 onClick={() => handleAlertClick('attendance')}
-                className="w-full flex items-start space-x-3 p-3 bg-red-50 rounded-lg border border-red-200 hover:bg-red-100 transition-colors text-left"
+                className="w-full flex items-start space-x-3 p-3 bg-red-50/70 rounded-lg hover:bg-red-100 transition-colors text-left border-l-4 border-red-400"
               >
                 <Clock className="h-5 w-5 text-red-600 mt-0.5 flex-shrink-0" />
                 <div className="flex-1 min-w-0">
@@ -549,7 +580,7 @@ const Overview: React.FC<OverviewProps> = ({ setActiveSection }) => {
             
             <button 
               onClick={() => handleAlertClick('payroll')}
-              className="w-full flex items-start space-x-3 p-3 bg-blue-50 rounded-lg border border-blue-200 hover:bg-blue-100 transition-colors text-left"
+              className="w-full flex items-start space-x-3 p-3 bg-blue-50/70 rounded-lg hover:bg-blue-100 transition-colors text-left border-l-4 border-blue-400"
             >
               <FileText className="h-5 w-5 text-blue-600 mt-0.5 flex-shrink-0" />
               <div className="flex-1 min-w-0">
@@ -572,7 +603,7 @@ const Overview: React.FC<OverviewProps> = ({ setActiveSection }) => {
             </h3>
           </div>
           <div className="space-y-4">
-            <div className="p-3 bg-purple-50 rounded-lg">
+            <div className="p-3 bg-purple-50/70 rounded-lg border-l-4 border-purple-400">
               <div className="flex items-center justify-between">
                 <span className="text-sm font-medium text-gray-900">Department Performance</span>
                 <span className="text-sm font-bold text-purple-600">
@@ -589,7 +620,7 @@ const Overview: React.FC<OverviewProps> = ({ setActiveSection }) => {
               <p className="text-xs text-gray-600 mt-1">Highest average performance rating</p>
             </div>
             
-            <div className="p-3 bg-blue-50 rounded-lg">
+            <div className="p-3 bg-blue-50/70 rounded-lg border-l-4 border-blue-400">
               <div className="flex items-center justify-between">
                 <span className="text-sm font-medium text-gray-900">Attendance Trend</span>
                 <span className="text-sm font-bold text-blue-600">↗ Improving</span>
@@ -597,7 +628,7 @@ const Overview: React.FC<OverviewProps> = ({ setActiveSection }) => {
               <p className="text-xs text-gray-600 mt-1">Weekly attendance showing positive trend</p>
             </div>
             
-            <div className="p-3 bg-green-50 rounded-lg">
+            <div className="p-3 bg-green-50/70 rounded-lg border-l-4 border-green-400">
               <div className="flex items-center justify-between">
                 <span className="text-sm font-medium text-gray-900">Team Growth</span>
                 <span className="text-sm font-bold text-green-600">+{recentHires} this month</span>
@@ -631,7 +662,7 @@ const Overview: React.FC<OverviewProps> = ({ setActiveSection }) => {
               <button
                 key={dept}
                 onClick={() => handleNavigation('employees')}
-                className="p-4 border border-gray-200 rounded-lg hover:shadow-md transition-all hover:border-blue-300 text-left w-full"
+                className="p-4 bg-gray-50/50 rounded-lg hover:bg-white hover:shadow-md transition-all hover:border hover:border-blue-300 text-left w-full"
               >
                 <div className="flex items-center justify-between mb-3">
                   <h4 className="font-medium text-gray-900 truncate">{dept}</h4>
@@ -677,7 +708,7 @@ const Overview: React.FC<OverviewProps> = ({ setActiveSection }) => {
         <div className="space-y-3 sm:space-y-4">
           <button 
             onClick={() => handleActivityClick('hires')}
-            className="w-full flex items-start space-x-3 p-3 bg-blue-50 rounded-lg hover:bg-blue-100 transition-colors text-left"
+            className="w-full flex items-start space-x-3 p-3 bg-blue-50/50 rounded-lg hover:bg-blue-100 transition-colors text-left border-l-4 border-blue-400"
           >
             <div className="w-2 h-2 bg-blue-500 rounded-full mt-2 flex-shrink-0"></div>
             <div className="flex-1 min-w-0">
@@ -695,7 +726,7 @@ const Overview: React.FC<OverviewProps> = ({ setActiveSection }) => {
           
           <button 
             onClick={() => handleActivityClick('performance')}
-            className="w-full flex items-start space-x-3 p-3 bg-green-50 rounded-lg hover:bg-green-100 transition-colors text-left"
+            className="w-full flex items-start space-x-3 p-3 bg-green-50/50 rounded-lg hover:bg-green-100 transition-colors text-left border-l-4 border-green-400"
           >
             <div className="w-2 h-2 bg-green-500 rounded-full mt-2 flex-shrink-0"></div>
             <div className="flex-1 min-w-0">
@@ -709,7 +740,7 @@ const Overview: React.FC<OverviewProps> = ({ setActiveSection }) => {
           
           <button 
             onClick={() => handleActivityClick('attendance')}
-            className="w-full flex items-start space-x-3 p-3 bg-yellow-50 rounded-lg hover:bg-yellow-100 transition-colors text-left"
+           className="w-full flex items-start space-x-3 p-3 bg-yellow-50/50 rounded-lg hover:bg-yellow-100 transition-colors text-left border-l-4 border-yellow-400"
           >
             <div className="w-2 h-2 bg-yellow-500 rounded-full mt-2 flex-shrink-0"></div>
             <div className="flex-1 min-w-0">
@@ -723,7 +754,7 @@ const Overview: React.FC<OverviewProps> = ({ setActiveSection }) => {
 
           <button 
             onClick={() => handleActivityClick('recruitment')}
-            className="w-full flex items-start space-x-3 p-3 bg-purple-50 rounded-lg hover:bg-purple-100 transition-colors text-left"
+          className="w-full flex items-start space-x-3 p-3 bg-purple-50/50 rounded-lg hover:bg-purple-100 transition-colors text-left border-l-4 border-purple-400"
           >
             <div className="w-2 h-2 bg-purple-500 rounded-full mt-2 flex-shrink-0"></div>
             <div className="flex-1 min-w-0">
@@ -753,7 +784,7 @@ const Overview: React.FC<OverviewProps> = ({ setActiveSection }) => {
         </div>
         <div className="mt-4 grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3 text-xs">
           {Object.entries(departmentData).map(([dept, count]) => (
-            <div key={dept} className="flex items-center justify-between p-3 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors">
+            <div key={dept} className="flex items-center justify-between p-3 bg-gray-50/70 rounded-lg hover:bg-gray-100 transition-colors">
               <span className="truncate text-gray-700 font-medium">{dept}</span>
               <span className="font-bold text-blue-600">{count}</span>
             </div>
